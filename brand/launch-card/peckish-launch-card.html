@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Peckish · Launch card · 1080×1350</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --lime:#3DB14B;--tang:#FF6A1A;--lemon:#FFD12B;
+    --chalk:#FFFEF6;--paper:#FAF6E2;--ink:#11160A;
+    --rule:rgba(17,22,10,.10);--note:rgba(17,22,10,.62);
+    --display:"Fraunces",Georgia,serif;
+    --text:"Inter",system-ui,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:#1a1a1a;font-family:var(--text);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .stage{
+    width:1080px;height:1350px;
+    margin:40px auto;background:var(--chalk);
+    display:grid;grid-template-rows:auto auto auto auto auto auto;
+    padding:64px 64px;gap:0;position:relative;
+    transform-origin:top center;
+  }
+  /* scale to fit */
+  @media (max-width:1180px){ .stage{transform:scale(calc((100vw - 80px) / 1080))} }
+
+  .crumb{font-family:var(--mono);font-size:14px;letter-spacing:.18em;text-transform:uppercase;color:var(--note);
+    display:flex;align-items:center;gap:14px;margin:0 0 200px}
+  .crumb::before{content:"";width:24px;height:1px;background:currentColor}
+  .crumb b{color:var(--ink);font-weight:500}
+
+  .wm{
+    font-family:var(--display);font-weight:500;
+    font-variation-settings:"opsz" 144,"SOFT" 80,"WONK" 1;
+    letter-spacing:-0.04em;line-height:.86;margin:0;color:var(--ink);
+    font-size:200px;white-space:nowrap;
+  }
+  .wm .stem{position:relative;display:inline-block}
+  .wm .icon{position:absolute;left:50%;top:0.04em;width:.36em;height:.5em;transform:translate(-50%,-100%)}
+
+  .tagline{
+    font-family:var(--display);font-style:italic;font-weight:400;
+    font-variation-settings:"opsz" 144,"SOFT" 100,"WONK" 1;
+    font-size:78px;line-height:1.02;letter-spacing:-0.02em;
+    color:var(--ink);margin:42px 0 0;max-width:14ch;text-wrap:balance;
+  }
+
+  .hero{
+    margin:48px 0 0;padding:36px 40px;border:1px solid var(--rule);border-radius:16px;background:var(--paper);
+    font-family:var(--display);font-weight:400;
+    font-variation-settings:"opsz" 36,"SOFT" 100,"WONK" 1;
+    font-size:24px;line-height:1.5;letter-spacing:-0.005em;color:var(--ink);max-width:60ch;text-wrap:pretty;
+  }
+  .hero em{font-style:italic}
+
+  .palette{margin:36px 0 0;display:flex;gap:10px}
+  .palette .sw{flex:1;border-radius:10px;height:60px;border:1px solid rgba(0,0,0,.04);
+    display:flex;align-items:flex-end;justify-content:flex-start;padding:8px 10px;
+    font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink)}
+  .palette .sw.dark{color:var(--chalk)}
+
+  .footer{
+    margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;
+    padding-top:36px;border-top:1px solid var(--rule);
+  }
+  .footer .meta{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--note);line-height:1.9;display:flex;flex-direction:column;gap:2px;flex-shrink:0}
+  .footer .meta div{white-space:nowrap}
+  .footer .meta b{color:var(--ink);font-weight:500}
+  .footer .url{font-family:var(--display);font-weight:500;font-size:36px;
+    font-variation-settings:"opsz" 36,"SOFT" 80,"WONK" 1;letter-spacing:-0.005em;color:var(--ink)}
+</style>
+</head>
+<body>
+  <div class="stage">
+    <p class="crumb"><b>Peckish</b> · launch · brand in a page</p>
+
+    <h1 class="wm">Peck<span class="stem">ı<span class="icon" aria-hidden="true">
+      <svg viewBox="0 0 34 55" preserveAspectRatio="xMidYEnd meet" style="width:100%;height:100%;display:block;overflow:visible">
+        <ellipse cx="17" cy="42" rx="11" ry="13" transform="rotate(-12 17 42)" fill="#FF6A1A"/>
+        <path d="M17 30 C 8 22, 6 12, 12 4 C 17 10, 19 18, 17 26 Z" fill="#3DB14B"/>
+        <path d="M17 28 C 26 22, 28 14, 24 6 C 20 10, 18 18, 17 26 Z" fill="#2F8C3A"/>
+      </svg>
+    </span></span>sh</h1>
+
+    <p class="tagline">Stop staring at the&nbsp;fridge.</p>
+
+    <div class="hero">
+      It's somewhere around quarter to six. The fridge is open, the kids are loud, and you've been staring at the same shelf for ninety seconds without registering a single thing on it. Peckish takes a photo of what's there and quietly tells you what to make with it — not because you're saving time, but because you'd rather <em>decide than guess.</em>
+    </div>
+
+    <div class="palette">
+      <div class="sw" style="background:#3DB14B;color:#fff">Lime</div>
+      <div class="sw" style="background:#FF6A1A;color:#fff">Tangerine</div>
+      <div class="sw" style="background:#FFD12B">Lemon</div>
+      <div class="sw" style="background:#FFFEF6;border:1px solid var(--rule)">Chalk</div>
+      <div class="sw" style="background:#FAF6E2">Paper</div>
+      <div class="sw dark" style="background:#11160A">Ink</div>
+    </div>
+
+    <div class="footer">
+      <div class="meta">
+        <div><b>Mark</b> · Sprout</div>
+        <div><b>Type</b> · Fraunces</div>
+        <div><b>Voice</b> · quietly funny</div>
+      </div>
+      <div class="url">peckish.app</div>
+    </div>
+  </div>
+</body>
+</html>

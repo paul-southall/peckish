@@ -1,8 +1,8 @@
 # Peckish
 
-*Tagline lands when the brand work does.*
+*Stop staring at the fridge.*
 
-A small, opinionated cooking helper. You take a photo of your fridge; Peckish suggests three dinners you can actually make tonight, with the time each will take and what's missing if anything.
+A small kitchen helper. You take a photo of your fridge; Peckish suggests three dinners you can actually make tonight, with the time each will take and what's missing if anything.
 
 > **In development.** Peckish is being built in public over five to six weekends. This README fills in as the project does — see the [build journal](./docs/journal.md) for week-by-week progress.
 

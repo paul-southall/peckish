@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <title>Peckish — seed and sprout — color</title>
+  <g transform="translate(25.35 10) scale(1.45)">
+    <ellipse cx="17" cy="42" rx="11" ry="13" transform="rotate(-12 17 42)" fill="#FF6A1A"></ellipse>
+    <path d="M17 30 C 8 22, 6 12, 12 4 C 17 10, 19 18, 17 26 Z" fill="#3DB14B"></path>
+    <path d="M17 28 C 26 22, 28 14, 24 6 C 20 10, 18 18, 17 26 Z" fill="#2F8C3A"></path>
+  </g>
+</svg>
