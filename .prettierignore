@@ -1,0 +1,14 @@
+node_modules
+dist
+build
+coverage
+pnpm-lock.yaml
+_planning
+brand
+*.svg
+*.html
+
+# Markdown is voice-locked prose in this repo (brand book, ADRs, journal,
+# SKILL.md). Prettier's opinions on lists and reflow conflict with the
+# cookbook-style voice. Format markdown by hand.
+*.md

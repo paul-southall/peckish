@@ -18,7 +18,9 @@ A small web demo will wrap the same backend for visitors who don't run an MCP cl
 
 ## How to use it
 
-*Install instructions land at end of session 2.* For now, see the [build plan](./_planning/pantry-to-dinner-build-plan.md) for the project's intended shape and the [build journal](./docs/journal.md) for what's actually shipped so far.
+*Install instructions land at end of session 2.* When they do, installation will involve registering `pantry-mcp` as an MCP server in your Claude client — on macOS, that's `~/Library/Application Support/Claude/claude_desktop_config.json`.
+
+For now, see the [build plan](./_planning/pantry-to-dinner-build-plan.md) for the project's intended shape and the [build journal](./docs/journal.md) for what's actually shipped so far.
 
 ## Why it's built this way
 

@@ -1,0 +1,28 @@
+{
+  "name": "peckish",
+  "version": "0.0.0",
+  "private": true,
+  "description": "A small kitchen helper. Photo of the fridge, three dinners.",
+  "license": "MIT",
+  "type": "module",
+  "packageManager": "pnpm@11.0.9",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "test": "pnpm -r test",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.0",
+    "@types/node": "^25.0.0",
+    "eslint": "^10.0.0",
+    "prettier": "^3.8.0",
+    "typescript": "^6.0.0",
+    "typescript-eslint": "^8.59.0"
+  }
+}
