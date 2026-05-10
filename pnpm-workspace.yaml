@@ -1,0 +1,7 @@
+packages:
+  - 'packages/pantry-mcp'
+allowBuilds:
+  # Native sqlite binding — needs to compile against Node's headers.
+  better-sqlite3: true
+  # Postinstall fetches the prebuilt binary for the host platform.
+  esbuild: true
