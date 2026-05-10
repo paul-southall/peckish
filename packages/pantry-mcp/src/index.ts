@@ -1,21 +1,16 @@
-import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 
 import { initDb, type Db } from './db.js';
 import { log } from './log.js';
 import { resolveDbPath } from './paths.js';
-
-const SERVER_NAME = 'pantry-mcp';
-const SERVER_VERSION = '0.1.0';
+import { buildServer, SERVER_NAME, SERVER_VERSION } from './server.js';
 
 async function main(): Promise<void> {
   const dbPath = resolveDbPath();
   const db = initDb(dbPath);
   log.info('database ready', { path: dbPath });
 
-  const server = new McpServer({ name: SERVER_NAME, version: SERVER_VERSION });
-  // Tools register in subsequent PRs. The empty registry is intentional.
-
+  const server = buildServer(db);
   registerShutdown(db);
 
   const transport = new StdioServerTransport();

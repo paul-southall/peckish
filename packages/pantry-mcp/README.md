@@ -8,10 +8,14 @@ This package is the engineered core. The skill in [`packages/skill/`](../skill/)
 calls it; the eventual landing page in [`packages/web/`](../web/) (Increment 4)
 will too.
 
-## Status
+## Tools
 
-**Scaffold only.** Server boots, runs SQLite migrations, exposes zero tools.
-Tools land in the next PR.
+| Tool | What it does |
+|---|---|
+| `list_pantry` | Returns every pantry row, sorted alphabetically by name. |
+| `add_item` | Inserts a row. Two adds of the same name produce two rows; consolidation is intentional for v1. |
+| `remove_item` | Removes some or all of an ingredient. Multiple matching rows are decremented oldest-first (FIFO). |
+| `recognise_ingredients` | Wraps a Haiku vision call ([ADR-002](../../docs/adr/0002-model-routing.md)). Takes a base64 photo, returns raw recognition results with per-item confidence. No filtering at this boundary — the skill decides how to present uncertainty. |
 
 ## Stack
 
@@ -25,6 +29,7 @@ TypeScript on Node 22, the official `@modelcontextprotocol/sdk`, `zod`,
 pnpm install                            # from repo root
 pnpm --filter pantry-mcp dev            # tsx watch on stdio
 pnpm --filter pantry-mcp test           # vitest run
+pnpm --filter pantry-mcp test:coverage  # vitest run + 60% threshold gate
 pnpm --filter pantry-mcp typecheck      # tsc --noEmit
 pnpm --filter pantry-mcp lint           # eslint
 pnpm --filter pantry-mcp build          # tsup → dist/index.js
@@ -45,8 +50,12 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 }
 ```
 
-Restart Claude Desktop. With this scaffold the server appears with zero tools
-advertised — that's the intended state until the next PR.
+Restart Claude Desktop. The server appears with four tools advertised. The
+recognise-ingredients tool needs `ANTHROPIC_API_KEY` in the spawned MCP
+process's environment — easiest path is the bundled
+[`scripts/register-mcp.sh`](../../scripts/register-mcp.sh), which reads
+the key from your local `.env` and injects it into the MCP entry's `env`
+block.
 
 ## Database
 
