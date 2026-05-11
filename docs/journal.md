@@ -50,4 +50,61 @@ Issues 1 and 3 from the backlog move from Backlog to In Progress as the session 
 
 ---
 
-*Next entry lands at end of session 2.*
+## 2026-05-10 — Session 2: tools, ADR-002, and the first end-to-end smoke
+
+### What shipped
+
+Two PRs merged, both with proper audit trails this time.
+
+- **PR #7 — `scaffold(pantry-mcp): initialise package, dependencies, db schema`.** The TypeScript backbone: pnpm workspaces, ESLint 9 flat config, Prettier, EditorConfig, `tsconfig.base.json` strict, Node 22 pinned, CI on every push, the MCP-server skeleton on top of an initialised SQLite database. Booted with zero tools registered — deliberate split between *the scaffold is sound* and *the tools work*.
+- **PR #8 — `feat(pantry-mcp): four MCP tools + ADR-002 model routing`.** The four tools the skill expects (`list_pantry`, `add_item`, `remove_item`, `recognise_ingredients`), each with its own `tests/tools/<name>.test.ts` and a sibling `.test.prompt.md` capturing the prompt that produced it. ADR-002 locking Haiku for vision and Sonnet for recipes. Coverage gate at 60%, currently sitting at 93 / 97 / 87 / 94 (statements / branches / functions / lines). 44 tests, ~300 ms.
+
+The audit-trail story tightened mid-session. The first PR went up with a commit message stacked on top of the empty PR template — sub-grade for a project whose whole positioning is *AI-native engineering management with proper PR descriptions*. Fixed by drafting the title and body inside the plan file and applying via `gh pr edit`. Same correction landed on PR #8 before merge. Pattern locked: Claude drafts the PR description as part of the plan, not after the diff is in.
+
+### The smoke test, end-to-end
+
+First fridge photo through the full pipeline, against Haiku 4.5 in the real Claude Desktop. The headline: it worked, and it worked better than the brand book's *"honest about what vision is and isn't ready for"* line implied.
+
+- **Brand-name reading.** Vision picked up *Chobani Cookies'n'Cream, Vaalia, Farmers Union strawberry* — specific labels, not categories. Update prior on what Haiku 4.5 multimodal can do on real-world fridge clutter.
+- **Calibrated hedging surfaced as user-visible uncertainty.** *"what looks like chocolate bars"*, *"what appears to be a sauce/dressing bottle"*, *"if that block cheese is parmesan or similar"*, *"hard to tell"* on red items. The system prompt's *lower the confidence when occluded / opaque container / guessing* directive landed all the way through to the response.
+- **Tool composition working.** *"Combined with the 200g of pasta already in your pantry"* — `list_pantry` and `recognise_ingredients` both called in one turn, results woven together. Two MCP round-trips in one response, both succeeding.
+- **Three meaningfully different recipes proposed.** One-pan bake, minimal cacio e pepe, plated with sides — the SKILL.md *three meaningfully different* contract working in the wild even though the skill isn't formally registered yet.
+
+> _\[texture: how the smoke test actually felt — was anything striking, anything that felt off, the bit you'd quote in a launch post\]_
+
+### What didn't ship — and why it didn't bite
+
+- **Skill registration.** `packages/skill/SKILL.md` is markdown on disk but not yet a registered Claude skill. The smoke test got the structured-output behaviour anyway because Claude orchestrated the MCP tools directly with its own presentation logic. Lands with issue #2 in a future session.
+- **Eval suite.** Triggering, quality, photo-accuracy — issue #4. Not in this session's scope.
+- **Allergen verifier.** Increment 1 territory.
+
+The output-format gap is the visible one: SKILL.md specifies a strict `**Option 1 — [Name]** / ~X minutes · [cuisine] / Uses / Missing / Why tonight` shape, and the smoke test produced friendly prose instead. That's expected pre-skill-registration but worth naming so it's not a surprise later.
+
+### What got harder than expected
+
+- **pnpm/action-setup@v4 → v6 mid-PR.** v4's self-installer doesn't handle pnpm 11 — CI failed with *"Something went wrong, self-installer exits with code 1"*. One-line bump to `@v6` fixed it. Lesson: GitHub Actions pinned versions go stale faster than the underlying tools they wrap.
+- **pnpm 11's `allowBuilds` security gate.** Native modules (`better-sqlite3`, `esbuild`) need explicit approval in `pnpm-workspace.yaml`. First install completed without running the install scripts, so `better-sqlite3` had no native binding. Required `rm -rf node_modules && pnpm install` to re-trigger after approval.
+- **Strict-type-checked ESLint vs vitest's `expect.stringMatching` returning `any`.** Triggered `no-unsafe-assignment` whichever way the cast went. Refactored the test to split the structural assertion from the regex assertion. Cleaner anyway.
+- **Coverage gate caught utility modules at 0%.** `log.ts`, `paths.ts`, `anthropic.ts` weren't exercised by tool tests. Added quick standalone tests; coverage jumped from 52% functions to 87%. The discipline is right, the surprise was just *the gate fires immediately, not gradually*.
+
+> _\[texture: any moment of friction you'd want to be honest about, anything that almost made you walk away\]_
+
+### The call I'd defend
+
+Splitting scaffold from tool implementation into two PRs rather than one ~600-line mixed-shape PR. The audit trail benefits — a reviewer can hold *the foundation is sound* and *the tools work* in their head as separate questions. Two clean commits on `main` is worth more than one tidy merge.
+
+The other defensible call: pass-through confidence on `recognise_ingredients` rather than filtering at the tool boundary. The smoke test made it land — *"if that block cheese is parmesan"* is exactly the conditional surfacing that wouldn't have happened with a 0.4 confidence threshold dropping the row silently. Data layer stays raw, presentation logic stays in the skill, and the system is honest about what it sees.
+
+> _\[texture: anything else you'd publicly defend, or anything you'd take a different angle on\]_
+
+### Next session
+
+Issue #2 — **Build CookFromPantry skill** — so the structured-output format SKILL.md specifies actually lands at runtime. That closes the visible gap from the smoke test. Probably alongside issue #5 (README polish + demo gif of the smoke-test flow) and the start of issue #4 (eval scaffolding).
+
+Worth recording the smoke-test response itself somewhere (probably a `_planning/smoke-tests/` directory, gitignored or scrubbed of identifying details before commit). It'll be the strongest single artefact for the eventual launch-week post.
+
+Issues #1 and #3 are now closed by PR #8.
+
+---
+
+*Next entry lands at end of session 3.*
